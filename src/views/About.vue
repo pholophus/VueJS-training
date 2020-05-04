@@ -9,32 +9,33 @@
         </div>
 
         <ul>
-            <li v-for="stated in states" :key="stated.id"></li>
+            <li v-for="stated in states" :key="stated">{{stated}}</li>
         </ul>
 
     </div>
 </template>
 
 <script>
-//const axios = require('axios');
+const axios = require('axios');
 
 export default {
     data: function() {
         return {
             state: '',
             modal: false,
-            states: ['selangor', 'sabah', 'sarawak'],
+            states: //['selangor', 'sarawak', 'sabah', 'sandakan', 'perlis', 'pahang'],
+            [],
             filteredStates: []
         }
     },
 
     mounted: function() {
 
-    /*axios.get('https://jsonplaceholder.typicode.com/posts')
-    .then(response => this.states = response.data)
+    axios.get('https://jsonplaceholder.typicode.com/posts')
+    .then(response => this.states.push(response.title))
     //need to be wraped in array because posts return array of posts
     //.catch(error => this.state = [{title: 'No posts found'}])
-    .finally(() => console.log('Data finished rendered'));*/
+    .finally(() => console.log('Data finished rendered'));
       
     this.filterStates();
     },
