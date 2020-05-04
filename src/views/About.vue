@@ -1,6 +1,6 @@
 <template>
     <div class="about flex flex-col items-center">
-      <div class=" absolute inset-0 z-0" @click="modal = flase"></div>
+      <div class=" absolute inset-0 z-0" @click="modal = false"></div>
         <input type="text" class="bg-gray-300 px-4 py-2 z-10" autocomplete="off" v-model="state" @focus="modal = true">
         <div v-if="filterStates && modal" class="z-10">
             <ul class="w-48 bg-gray-800 text-white ">
@@ -32,7 +32,9 @@ export default {
     mounted: function() {
 
     axios.get('https://jsonplaceholder.typicode.com/posts')
-    .then(response => this.states.push(response.title))
+    .then(response => response.data.forEach(function( data ){
+        this.states.push(data['title']);
+    }))
     //need to be wraped in array because posts return array of posts
     //.catch(error => this.state = [{title: 'No posts found'}])
     .finally(() => console.log('Data finished rendered'));
